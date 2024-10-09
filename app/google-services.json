@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "895232529011",
+    "project_id": "sporthall-manager",
+    "storage_bucket": "sporthall-manager.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895232529011:android:2126c18637bbcdd0351006",
+        "android_client_info": {
+          "package_name": "com.example.sporthallmanager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDx4OEizXSFLiJhVRfsO5HOtffiHmTAw78"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
