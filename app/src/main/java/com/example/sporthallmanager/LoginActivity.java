@@ -8,10 +8,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;
 
- public class MainActivity_Login extends AppCompatActivity {
+ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth auth;
+    GoogleSignInClient googleSignInClient;
 
 
     @Override
