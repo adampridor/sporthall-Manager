@@ -63,7 +63,7 @@ import java.util.Objects;
                                 name.setText(auth.getCurrentUser().getDisplayName());
                                 mail.setText(auth.getCurrentUser().getEmail());
                                 Toast.makeText(LoginActivity.this, "Signed in successfully!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                                Intent intent = new Intent(LoginActivity.this,MainCalendarActivity.class);
                                 intent.putExtra("USERNAME",auth.getCurrentUser().getDisplayName());
 
                                 startActivity(intent);
