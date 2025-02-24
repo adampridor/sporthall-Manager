@@ -35,7 +35,7 @@ public class MainCalendarActivity extends AppCompatActivity {
                 // Note that months are indexed from 0
                 String date = dayOfMonth + "/" + (month + 1) + "/" + year;
                 Toast.makeText(getApplicationContext(), date, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainCalendarActivity.this, MainActivity.class);
+                Intent intent = new Intent(MainCalendarActivity.this, HourlyScheduleActivity.class);
                 intent.putExtra("selected_date", date);
                 startActivity(intent);
             }
