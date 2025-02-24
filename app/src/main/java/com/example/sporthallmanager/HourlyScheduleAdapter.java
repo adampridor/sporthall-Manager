@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +29,17 @@ public class HourlyScheduleAdapter extends RecyclerView.Adapter<HourlyScheduleAd
         TimeSlot slot = timeSlots.get(position);
         holder.timeText.setText(slot.getTime());
         holder.statusText.setText(slot.getStatus());
+
+        holder.statusText.setOnClickListener(v -> {
+            if ("Available".equals(slot.getStatus())) {
+                // change to unavailable
+                slot.setStatus("Unavailable");
+                holder.statusText.setText("Unavailable");
+
+                // toast
+                Toast.makeText(v.getContext(), "Time slot " + slot.getTime() + " is now Unavailable!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
