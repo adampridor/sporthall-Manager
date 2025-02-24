@@ -3,6 +3,7 @@
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,6 +58,7 @@ import java.util.Objects;
                     auth.signInWithCredential(authCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+                            Log.e("XXX", "onComplete: " + task.isSuccessful());
                             if (task.isSuccessful()) {
                                 auth = FirebaseAuth.getInstance();
                                 Glide.with(LoginActivity.this).load(Objects.requireNonNull(auth.getCurrentUser()).getPhotoUrl()).into(imageView);
@@ -101,9 +103,11 @@ import java.util.Objects;
         auth = FirebaseAuth.getInstance();
 
         SignInButton signInButton = findViewById(R.id.signIn);
-        signInButton.setOnClickListener(    new View.OnClickListener() {
+        Log.e("XXX", "onCreate: " + auth.getCurrentUser());
+        signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("XXX", "onClick: ");
                 Intent intent = googleSignInClient.getSignInIntent();
                 activityResultLauncher.launch(intent);
             }
