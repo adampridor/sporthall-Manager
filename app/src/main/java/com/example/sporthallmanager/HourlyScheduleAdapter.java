@@ -1,5 +1,8 @@
 
 package com.example.sporthallmanager;
+import static androidx.core.content.ContextCompat.startActivity;
+
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +41,8 @@ public class HourlyScheduleAdapter extends RecyclerView.Adapter<HourlyScheduleAd
 
                 // toast
                 Toast.makeText(v.getContext(), "Time slot " + slot.getTime() + " is now Unavailable!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(v.getContext(), PracticeRegisterActivity.class);
+                v.getContext().startActivity(intent);
             }
         });
     }
