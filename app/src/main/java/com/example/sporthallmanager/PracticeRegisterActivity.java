@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class PracticeRegisterActivity extends AppCompatActivity {
 
@@ -65,6 +67,25 @@ public class PracticeRegisterActivity extends AppCompatActivity {
         String message = "Name: " + firstName + " " + lastName + "\nEmail: " + email +
                 "\nActivity: " + activityType + "\nAge: " + age + "\nPhone: " + phoneNumber;
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+
+
+
+        Practice practice = new Practice(firstName, lastName, email, activityType, age, phoneNumber);
+
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("practices");
+
+
+        String practiceId = myRef.push().getKey();
+        myRef.child(practiceId).setValue(practice)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(PracticeRegisterActivity.this, "Data Saved!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(PracticeRegisterActivity.this, HourlyScheduleActivity.class));
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(PracticeRegisterActivity.this, "Failed to save data", Toast.LENGTH_SHORT).show();
+                });
 
         Intent intent = new Intent(PracticeRegisterActivity.this, HourlyScheduleActivity.class);
         startActivity(intent);
