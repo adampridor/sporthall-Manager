@@ -10,6 +10,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.Toast;
 
@@ -23,6 +25,9 @@ public class MainCalendarActivity extends AppCompatActivity {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+
+
+
             return insets;
 
         });
@@ -40,6 +45,17 @@ public class MainCalendarActivity extends AppCompatActivity {
                 startActivity(intent);
             }
 
+        });
+        Button btnGoToDisplayPractice = findViewById(R.id.button);
+
+        // Set OnClickListener to open DisplayPracticeActivity
+        btnGoToDisplayPractice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Intent to go to DisplayPracticeActivity
+                Intent intent = new Intent(MainCalendarActivity.this, DisplayPracticeActivity.class);
+                startActivity(intent);
+            }
         });
     }
 }
