@@ -9,6 +9,7 @@ public class Practice {
     private String phoneNumber;
 
     public Practice() {} // Empty constructor required for Firebase
+
     public Practice(String firstName, String lastName, String email, String activityType, String age, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
