@@ -25,11 +25,13 @@ public class HourlyScheduleAdapter extends RecyclerView.Adapter<HourlyScheduleAd
     private List<TimeSlot> timeSlots;
     private Context context;
     private DatabaseReference databaseReference;
+    private String selectedDate;
 
-    public HourlyScheduleAdapter(Context context, List<TimeSlot> timeSlots, DatabaseReference databaseReference) {
+    public HourlyScheduleAdapter(Context context, List<TimeSlot> timeSlots, DatabaseReference databaseReference, String selectedDate) {
         this.context = context;
         this.timeSlots = timeSlots;
-        this.databaseReference = databaseReference; // ✅ FIX: Use the passed reference
+        this.databaseReference = databaseReference.child(selectedDate);
+        this.selectedDate = selectedDate;
     }
 
     @Override

@@ -26,6 +26,7 @@ public class HourlyScheduleActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private HourlyScheduleAdapter adapter;
     private List<TimeSlot> timeSlots = new ArrayList<>();
+    private String selectedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,18 +39,18 @@ public class HourlyScheduleActivity extends AppCompatActivity {
             return insets;
         });
 
+        selectedDate = getIntent().getStringExtra("selected_date");
+
         // Get the date from the intent
-        String selectedDate = getIntent().getStringExtra("selected_date");
         TextView dateHeader = findViewById(R.id.dateHeader);
         dateHeader.setText(selectedDate);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("TimeSlots");
-
+        databaseReference = FirebaseDatabase.getInstance().getReference("TimeSlots").child(selectedDate);
 
         // Set up RecyclerView for hourly slots
         RecyclerView scheduleList = findViewById(R.id.scheduleList);
         scheduleList.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new HourlyScheduleAdapter(this, timeSlots, databaseReference);
+        adapter = new HourlyScheduleAdapter(this, timeSlots, databaseReference, selectedDate);
         scheduleList.setAdapter(adapter);
 
         loadTimeSlots();
