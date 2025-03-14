@@ -1,6 +1,8 @@
 package com.example.sporthallmanager;
 
 import android.os.Bundle;
+import android.widget.Button;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,6 +35,10 @@ public class DisplayPracticeActivity extends AppCompatActivity {
         recyclerView.setAdapter(displayPracticeAdapter);
 
         fetchPracticesFromFirebase();
+
+        Button btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> finish()); // Closes current activity and returns to the previous one
+
     }
 
     private void fetchPracticesFromFirebase() {

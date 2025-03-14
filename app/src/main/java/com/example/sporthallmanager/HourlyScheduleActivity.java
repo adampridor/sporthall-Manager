@@ -2,6 +2,7 @@ package com.example.sporthallmanager;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -54,6 +55,9 @@ public class HourlyScheduleActivity extends AppCompatActivity {
         scheduleList.setAdapter(adapter);
 
         loadTimeSlots();
+
+        Button btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> finish()); // Closes current activity and returns to the previous one
 
     }
 

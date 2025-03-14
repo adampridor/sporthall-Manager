@@ -47,6 +47,9 @@ public class PracticeRegisterActivity extends AppCompatActivity {
                 submitForm();
             }
         });
+
+        Button btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> finish()); // Closes current activity and returns to the previous one
     }
 
     private void submitForm() {
