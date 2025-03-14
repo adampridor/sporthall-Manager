@@ -67,14 +67,10 @@ public class HourlyScheduleAdapter extends RecyclerView.Adapter<HourlyScheduleAd
 
         holder.statusText.setOnClickListener(v -> {
             if ("Available".equals(slot.getStatus())) {
-                slot.setStatus("Unavailable");
-                holder.statusText.setText("Unavailable");
-
-                // ✅ Update Firebase (removes need for SharedPreferences)
-                databaseReference.child(slot.getTime()).setValue("Unavailable");
-
-                Toast.makeText(v.getContext(), "Time slot " + slot.getTime() + " is now Unavailable!", Toast.LENGTH_SHORT).show();
+                // Open the form, but don't change the status yet
                 Intent intent = new Intent(v.getContext(), PracticeRegisterActivity.class);
+                intent.putExtra("selected_time", slot.getTime());
+                intent.putExtra("selected_date", selectedDate); // Pass the selected date
                 v.getContext().startActivity(intent);
             }
         });

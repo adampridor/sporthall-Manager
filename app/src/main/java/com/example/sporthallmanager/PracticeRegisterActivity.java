@@ -50,44 +50,51 @@ public class PracticeRegisterActivity extends AppCompatActivity {
     }
 
     private void submitForm() {
-        String firstName = etFirstName.getText().toString().trim();
-        String lastName = etLastName.getText().toString().trim();
-        String email = etEmail.getText().toString().trim();
-        String activityType = etActivityType.getText().toString().trim();
-        String age = etAge.getText().toString().trim();
-        String phoneNumber = etPhoneNumber.getText().toString().trim();
+            String firstName = etFirstName.getText().toString().trim();
+            String lastName = etLastName.getText().toString().trim();
+            String email = etEmail.getText().toString().trim();
+            String activityType = etActivityType.getText().toString().trim();
+            String age = etAge.getText().toString().trim();
+            String phoneNumber = etPhoneNumber.getText().toString().trim();
 
-        // Basic validation
-        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || activityType.isEmpty() || age.isEmpty() || phoneNumber.isEmpty()) {
-            Toast.makeText(this, "Please fill all fields!", Toast.LENGTH_SHORT).show();
-            return;
+            String selectedDate = getIntent().getStringExtra("selected_date");
+            String selectedTime = getIntent().getStringExtra("selected_time");
+
+            // Basic validation
+            if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || activityType.isEmpty() || age.isEmpty() || phoneNumber.isEmpty()) {
+                Toast.makeText(this, "Please fill all fields!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Create Practice object
+            Practice practice = new Practice(firstName, lastName, email, activityType, age, phoneNumber);
+
+            // Firebase references
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference("practices");
+            DatabaseReference timeSlotsRef = database.getReference("TimeSlots").child(selectedDate).child(selectedTime);
+
+            String practiceId = myRef.push().getKey();
+            myRef.child(practiceId).setValue(practice)
+                    .addOnSuccessListener(aVoid -> {
+                        // ✅ Update the time slot to "Unavailable"
+                        timeSlotsRef.setValue("Unavailable")
+                                .addOnSuccessListener(aVoid2 -> {
+                                    Toast.makeText(PracticeRegisterActivity.this, "Time slot booked!", Toast.LENGTH_SHORT).show();
+
+                                    // ✅ Start HourlyScheduleActivity only after both operations succeed
+                                    Intent intent = new Intent(PracticeRegisterActivity.this, HourlyScheduleActivity.class);
+                                    intent.putExtra("selected_date", selectedDate);  // Pass the date back
+                                    startActivity(intent);
+                                    finish(); // Close the form activity
+                                })
+                                .addOnFailureListener(e -> {
+                                    Toast.makeText(PracticeRegisterActivity.this, "Failed to update time slot!", Toast.LENGTH_SHORT).show();
+                                });
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(PracticeRegisterActivity.this, "Failed to save data", Toast.LENGTH_SHORT).show();
+                    });
         }
-
-        // Show collected data
-        String message = "Name: " + firstName + " " + lastName + "\nEmail: " + email +
-                "\nActivity: " + activityType + "\nAge: " + age + "\nPhone: " + phoneNumber;
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-
-
-
-        Practice practice = new Practice(firstName, lastName, email, activityType, age, phoneNumber);
-
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("practices");
-
-
-        String practiceId = myRef.push().getKey();
-        myRef.child(practiceId).setValue(practice)
-                .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(PracticeRegisterActivity.this, "Data Saved!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(PracticeRegisterActivity.this, HourlyScheduleActivity.class));
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(PracticeRegisterActivity.this, "Failed to save data", Toast.LENGTH_SHORT).show();
-                });
-
-        Intent intent = new Intent(PracticeRegisterActivity.this, HourlyScheduleActivity.class);
-        startActivity(intent);
     }
-}
+
