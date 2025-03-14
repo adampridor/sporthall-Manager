@@ -31,6 +31,8 @@ public class DisplayPracticeAdapter extends RecyclerView.Adapter<DisplayPractice
         holder.tvActivityType.setText(practice.getActivityType());
         holder.tvAge.setText(practice.getAge());
         holder.tvPhoneNumber.setText(practice.getPhoneNumber());
+        holder.dateText.setText("Date: " + (practice.getDate() != null ? practice.getDate() : "N/A"));
+        holder.timeText.setText("Time: " + (practice.getTime() != null ? practice.getTime() : "N/A"));
     }
 
     @Override
@@ -39,7 +41,7 @@ public class DisplayPracticeAdapter extends RecyclerView.Adapter<DisplayPractice
     }
 
     public static class PracticeViewHolder extends RecyclerView.ViewHolder {
-        TextView tvName, tvLastName, tvEmail, tvActivityType, tvAge, tvPhoneNumber;
+        TextView tvName, tvLastName, tvEmail, tvActivityType, tvAge, tvPhoneNumber, dateText, timeText;
 
         public PracticeViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -49,6 +51,8 @@ public class DisplayPracticeAdapter extends RecyclerView.Adapter<DisplayPractice
             tvActivityType = itemView.findViewById(R.id.tvActivityType);
             tvAge = itemView.findViewById(R.id.tvAge);
             tvPhoneNumber = itemView.findViewById(R.id.tvPhoneNumber);
+            dateText = itemView.findViewById(R.id.tvDate);
+            timeText = itemView.findViewById(R.id.tvTime);
         }
     }
 }

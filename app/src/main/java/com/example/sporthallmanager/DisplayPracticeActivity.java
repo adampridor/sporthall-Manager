@@ -21,6 +21,7 @@ public class DisplayPracticeActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private DisplayPracticeAdapter displayPracticeAdapter;
     private List<Practice> practiceList;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,8 @@ public class DisplayPracticeActivity extends AppCompatActivity {
         practiceList = new ArrayList<>();
         displayPracticeAdapter = new DisplayPracticeAdapter(practiceList);
         recyclerView.setAdapter(displayPracticeAdapter);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("practices");
 
         fetchPracticesFromFirebase();
 
