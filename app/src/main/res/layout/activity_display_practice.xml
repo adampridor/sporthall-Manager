@@ -3,36 +3,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="@android:color/white">
 
+    <!-- Header Table Layout -->
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stretchColumns="*">
+        android:stretchColumns="*"
+        android:background="@android:color/darker_gray"
+        android:padding="8dp">
 
         <TableRow>
-            <TextView android:text="Name" android:textStyle="bold"/>
-            <TextView android:text="Last Name" android:textStyle="bold"/>
-            <TextView android:text="Email" android:textStyle="bold"/>
-            <TextView android:text="Activity" android:textStyle="bold"/>
-            <TextView android:text="Age" android:textStyle="bold"/>
-            <TextView android:text="Phone" android:textStyle="bold"/>
+
+            <TextView
+                android:text="Name"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:padding="5dp"/>
+
+            <TextView
+                android:text="Last Name"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:padding="5dp"/>
+
+            <TextView
+                android:text="Email"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:padding="5dp"/>
+
+            <TextView
+                android:text="Activity"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:padding="5dp"/>
+
+            <TextView
+                android:text="Age"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:padding="5dp"/>
+
+            <TextView
+                android:text="Phone"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:padding="5dp"/>
         </TableRow>
     </TableLayout>
 
+    <!-- RecyclerView for displaying practice data -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:padding="5dp"
         android:contentDescription="Practice data list"/>
 
+    <!-- Back Button -->
     <Button
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back"
+        android:textStyle="bold"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:textColor="@android:color/white"
         android:layout_margin="16dp"
-        android:layout_gravity="start"/>
-
+        android:layout_gravity="start|bottom"
+        android:padding="10dp"/>
 </LinearLayout>
