@@ -20,12 +20,14 @@
                 android:text="Name"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
+                android:textSize="12sp"
                 android:padding="5dp"/>
 
             <TextView
                 android:text="Last Name"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
+                android:textSize="11sp"
                 android:padding="5dp"/>
 
             <TextView
@@ -48,6 +50,18 @@
 
             <TextView
                 android:text="Phone"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:padding="5dp"/>
+
+            <TextView
+                android:text="Date"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:padding="5dp"/>
+
+            <TextView
+                android:text="Time"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:padding="5dp"/>
